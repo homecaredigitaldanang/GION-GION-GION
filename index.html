@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Đi chơi với tớ nhé? ❄️</title>
+<title>BẤM VÀO ĐI BẤM VÀO ĐI HIHI</title>
+<meta property="og:title" content="BẤM VÀO ĐI BẤM VÀO ĐI HIHI" />
+<meta property="og:description" content="Mùa đông lạnh lắm, đi chơi với tớ cho ấm nha 🧣" />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--pink:#ff8fb8;--pink2:#ffd6e7;--blue:#bfe3ff;--blue2:#e8f5ff;--ink:#6b4a63;--white:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -217,8 +219,7 @@ $('no').onclick=()=>{
   }
 };
 $('yes').onclick=()=>show(caught?2:'c');
-$('sure').onclick=()=>show(2);
-$('back1').onclick=()=>show(1);
+$('sure').onclick=()=>show(2);$('back1').onclick=()=>show(1);
 
 /* Calendar */
 const today=new Date();today.setHours(0,0,0,0);
@@ -237,34 +238,28 @@ function cal(){
     g.appendChild(b);
   }
 }
-$('prev').onclick=()=>{if(--cm<0){cm=11;cy--}cal()};
-$('next').onclick=()=>{if(++cm>11){cm=0;cy++}cal()};
+$('prev').onclick=()=>{if(--cm<0){cm=11;cy--}cal()};$('next').onclick=()=>{if(++cm>11){cm=0;cy++}cal()};
 cal();
 let tm='';
 const fmtT=t=>t.replace(/^0/,'').replace(':','h');
 function chk(){$('to3').disabled=!(pick&&tm)}
 function setT(v){tm=v;[...$('tchips').children].forEach(c=>c.classList.toggle('sel',c.dataset.t===v));$('tin').value=v;chk()}
-['09:00','10:00','14:00','16:00','18:00','19:30'].forEach(t=>{const b=document.createElement('button');b.className='t';b.dataset.t=t;b.textContent=fmtT(t);b.onclick=()=>setT(t);$('tchips').appendChild(b)});
-$('tin').oninput=e=>setT(e.target.value);
-$('to3').onclick=()=>show(3);
-$('back2').onclick=()=>show(2);
+['09:00','10:00','14:00','16:00','18:00','19:30'].forEach(t=>{const b=document.createElement('button');b.className='t';b.dataset.t=t;b.textContent=fmtT(t);b.onclick=()=>setT(t);$('tchips').appendChild(b)});$('tin').oninput=e=>setT(e.target.value);
+$('to3').onclick=()=>show(3);$('back2').onclick=()=>show(2);
 
 /* Activities */
 const acts=[['🎬','Xem phim'],['🍜','Đi ăn'],['🧋','Ăn vặt'],['☕','Cafe'],['🌆','Dạo phố'],['🛕','Đi chùa']];
 const chosen=new Set();
 acts.forEach(([e,t])=>{
   const b=document.createElement('button');b.className='chip';b.textContent=e+' '+t;
-  b.onclick=()=>{chosen.has(t)?chosen.delete(t):chosen.add(t);b.classList.toggle('sel');$('to4').disabled=!chosen.size};
-  $('chips').appendChild(b);
+  b.onclick=()=>{chosen.has(t)?chosen.delete(t):chosen.add(t);b.classList.toggle('sel');$('to4').disabled=!chosen.size};$('chips').appendChild(b);
 });
 let text='';
 $('to4').onclick=()=>{
   const list=[...chosen].join(', ');
   text='Hẹn nhau nha! 💕 '+fmt(pick)+' lúc '+fmtT(tm)+', mình đi: '+list+' ❄️';
   $('sum').innerHTML='📅 <b>'+fmt(pick)+'</b><br>⏰ <b>'+fmtT(tm)+'</b><br>🎈 '+list;
-  $('ok').textContent='';show(4);
-};
-$('copy').onclick=async()=>{
+  $('ok').textContent='';show(4); };$('copy').onclick=async()=>{
   try{await navigator.clipboard.writeText(text);$('ok').textContent='Đã sao chép! Gửi cho tớ nha 💌'}
   catch(e){$('ok').textContent=text}
 };
